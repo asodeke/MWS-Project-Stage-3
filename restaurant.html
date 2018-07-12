@@ -59,12 +59,12 @@
           <!-- Form Start here -->
           <div class="modal-content">
           <span class="close">&times;</span>
-            <form action="" id="form" method="POST" name="form">
+            <form action="http://localhost:1337/reviews/" id="form" method="POST" name="form">
               <input id="username" name="username" placeholder="Enter Username" type="text" required>
               <br>
-              <input id="ratings" name="ratings" placeholder="Enter a rating out of 5" type="text" required>
+              <input id="ratings" name="ratings" min="0" max="5" placeholder="Enter a rating out of 5" type="text" required>
               <br>
-              <textarea id="comment" name="comment" placeholder="Enter a Review" required></textarea>
+              <textarea id="comment" name="comment" rows="9" placeholder="Enter a Review" required></textarea>
               <br>
               <input type="submit">
           </div>
@@ -89,6 +89,8 @@
   <script type="text/javascript" src="js/restaurant_info.js"></script>
   <!-- Modal javascript -->
   <script type="text/javascript" src="js/modaljs.js"></script>
+  <!-- Review javascript -->
+  <script type="text/javascript" src="js/postreview.js"></script>
   <!-- Google Maps -->
   <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDZnorm2C_OP-xn6F6M96SjjRLNynV-330&libraries=places&callback=initMap"></script>
   <!-- Replace old api key
