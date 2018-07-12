@@ -1,0 +1,70 @@
+/* Styles for form popup */
+#popUp{
+ 	font-size: 1em;
+  padding: 10px;
+	box-sizing: border-box;
+  border-radius: 4px;
+}
+
+#popUp:hover{
+	background-color: darkgrey;
+  color: white;
+  font-weight: bold;
+}
+
+/* The Modal (background) */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content/Box */
+.modal-content {
+  background-color: #fefefe;
+  margin: 30% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 40%;
+}
+
+/* The Close Button */
+.close {
+  color: #818080;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+/* Form Style */
+  input, textarea {
+	font-size: 1em;
+  width: 60%;
+  padding: 8px;
+  margin: 8px 60px;
+  box-sizing: border-box;
+  border-radius: 4px;
+}
+
+input[type=submit] {
+	width: 30%;
+}
+
+input[type=submit]:hover{
+	background-color: grey;
+  color: white;
+  font-weight: bold;
+}
