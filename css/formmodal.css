@@ -28,7 +28,7 @@
 /* Modal Content/Box */
 .modal-content {
   background-color: #fefefe;
-  margin: 30% auto;
+  margin: 15% auto;
   padding: 20px;
   border: 1px solid #888;
   width: 40%;
@@ -52,7 +52,7 @@
 /* Form Style */
   input, textarea {
 	font-size: 1em;
-  width: 60%;
+  width: 80%;
   padding: 8px;
   margin: 8px 60px;
   box-sizing: border-box;
@@ -67,4 +67,21 @@ input[type=submit]:hover{
 	background-color: grey;
   color: white;
   font-weight: bold;
+}
+
+/* Media Queries for Modal Pop */
+
+@media screen and (max-width: 799px) {
+  .modal-content{
+    margin: 25% auto;
+    padding: 5px;
+    width: 70%;
+  }
+}
+
+@media screen and (max-width: 520px) {
+  .modal-content{
+    margin: 35% auto;
+    padding: 15px;
+  }
 }
