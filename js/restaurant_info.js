@@ -60,6 +60,18 @@ fillRestaurantHTML = (restaurant = self.restaurant) => {
   image.src = DBHelper.imageUrlForRestaurant(restaurant);
   image.setAttribute("alt", "Restaurant Picture");
 
+  const favimage = document.getElementById('favorite-img');
+  favimage.className = 'favorite-img'
+  favimage.src = '/img/favicon/favorite.webp'
+  favimage.setAttribute("alt", "Favorite Image")
+  favimage.style.float = 'right'
+
+  const unfavimage = document.getElementById('favorite-img');
+  unfavimage.className = 'favorite-img'
+  unfavimage.src = '/img/favicon/nonfavorite.webp'
+  unfavimage.setAttribute("alt", "UnFavorite Image")
+  favimage.style.float = 'right'
+
   const cuisine = document.getElementById('restaurant-cuisine');
   cuisine.innerHTML = restaurant.cuisine_type;
 
@@ -192,4 +204,24 @@ getParameterByName = (name, url) => {
       .catch(error => {
         console.log(error);
     });
+  }
+
+/**
+  * Favorite / Unfavorite a Restaurant
+  */
+  function favortite(){
+    var icon =  document.getElementById('favorite-img');
+
+    icon.onclick = function(isFavorite){
+      self.restaurant.is_favorite = isFavorite;
+      const url = "http://localhost:1337/restaurants/" + self.restaurant.id + "/?is_favorite=" + isFavorite;
+
+      fetch(url,{
+        method: 'PUT',
+        headers: {
+          'content-type': 'application/json'
+        }
+      })
+      .then(response => response.json)
+    }
   }
