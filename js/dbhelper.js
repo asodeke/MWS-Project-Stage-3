@@ -106,18 +106,6 @@ class DBHelper {
    });
  }
 
-    //fetch(`${DBHelper.DATABASE_URL}${id}`).then(response => response.json())
-    /*
-    fetch(`${DBHelper.fetchRestaurants}${id}`).then(response => response.json())
-      //return restaurant from the database
-      .then(restaurant => callback(null,restaurant))
-      //catch error
-      .catch(err => {
-        callback (err,null);
-      }
-    );
-  }*/
-
   /**
    * Fetch restaurants by a cuisine type with proper error handling.
    */
@@ -206,6 +194,26 @@ class DBHelper {
       }
     });
   }
+
+  /**
+   * Fetch all reviews.
+
+  static fectchReviews(callback){
+    fetch(DBHelper.DATABASE_URL+'/reviews').then(response => response.json())
+      //.then(restaurants => callback(null,restaurants))
+      .then(restaurants =>
+            //add the restaurants to the server
+            DBHelper.cacheRestaurants(restaurants)
+      ).then(restaurants =>
+            //send the restaurants to callback to update the UI
+            callback(null, reviews)
+      ).catch(err => {
+        //catch any error
+        callback(err,null);
+      });
+    //});
+  }
+  */
 
   /**
    * Restaurant page URL.
