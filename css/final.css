@@ -84,6 +84,10 @@ footer {
 	margin: 2px -40px;
 }
 
+#favorite-img {
+  float: right;
+  margin: 10px 65px;
+}
 figcaption {
   font-style: italic;
   margin: 2px -40px;
