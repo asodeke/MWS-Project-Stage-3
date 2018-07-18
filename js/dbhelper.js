@@ -9,16 +9,35 @@ class DBHelper {
   static openDatabase() {
     //check for browser support
     if (!('indexedDB' in window)) {
-    console.log('This browser doesn\'t support IndexedDB');
-    return;
+      console.log('This browser doesn\'t support IndexedDB');
+      return;
     }
-
     // create database name and version and callback
     return idb.open('restaurants', 1 , upgradeDB => {
-    //create and returns a new object store or index
-        upgradeDB.createObjectStore('restaurants', { keyPath: 'id'});
+        //create and returns a new object store or index
+        upgradeDB.createObjectStore('restaurants', {
+          keyPath: 'id'
+      });
     });
   }
+
+  /**
+   * Open IDB Database for Reviews
+   */
+   //check for browser support
+   static openReviewsDB() {
+     if (!('indexedDB' in window)) {
+     console.log('This browser doesn\'t support IndexedDB');
+     return;
+   }
+   // create database name and version and callback
+   return idb.open('review', 1 , function(upgradeDB) {
+     //create and returns a new object store or index
+      var store = upgradeDB.createObjectStore('reviews', {
+         keyPath: 'id'
+      });
+   });
+ }
 
   /**
    * Show cached messages, by reading from the database opened above
@@ -41,16 +60,29 @@ class DBHelper {
         });
       });
     }
-    /*
-      return Promise.all(restaurants.map(function (restaurant) {
-        return store.put(restaurant);
-      })).then(function () {
-        return restaurants;
-      }).catch(function () {
-        tx.abort();
-        throw ('Restaurants were not added to DB');
+
+  /**
+    * Get Reviews for Restuarant by id
+    */
+    static getReviewsByRestaurantId(reviews){
+      return DBHelper.openDatabase().then(db =>{
+        if(!db) return;
+
+        //create transaction to write to database
+        const tx = db.transaction('reviews', 'readwrite');
+        const store = tx.objectStore('reviews');
+
+        // add all the reviews to indexDB
+        return Promise.all(reviews.map(review =>
+          store.put(review))).then(() => {
+            return reviews
+          })
+        .catch (() => {
+          tx.abort();
+          throw ('Reviews were not added');
+        });
       });
-    });*/
+    }
 
   /**
    * Database URL.
