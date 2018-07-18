@@ -64,13 +64,11 @@ fillRestaurantHTML = (restaurant = self.restaurant) => {
   favimage.className = 'favorite-img'
   favimage.src = '/img/favicon/favorite.webp'
   favimage.setAttribute("alt", "Favorite Image")
-  favimage.style.float = 'right'
 
   const unfavimage = document.getElementById('favorite-img');
   unfavimage.className = 'favorite-img'
   unfavimage.src = '/img/favicon/nonfavorite.webp'
   unfavimage.setAttribute("alt", "UnFavorite Image")
-  favimage.style.float = 'right'
 
   const cuisine = document.getElementById('restaurant-cuisine');
   cuisine.innerHTML = restaurant.cuisine_type;
