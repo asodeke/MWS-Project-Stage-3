@@ -5,14 +5,18 @@ self.addEventListener('install', function(event) {
         console.log('Opened cache');
         return cache.addAll([
           '/',
-          'js/main.js',
-          'js/restaurant_info.js',
           'js/dbhelper.js',
+          'js/idb.js',
+          'js/main.js',
+          'js/modaljs.js',
+          'js/postreview.js',
+          'js/restaurant_info.js',
           'index.html',
-          'img/',
           'restaurant.html',
+          'img/',
           'css/final.css',
-          'css/styles.css'
+          'css/styles.css',
+          'css/formmodal.css'
         ]);
       })
   );
