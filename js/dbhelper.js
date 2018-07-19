@@ -15,29 +15,21 @@ class DBHelper {
     // create database name and version and callback
     return idb.open('restaurants', 1 , upgradeDB => {
         //create and returns a new object store or index
-        upgradeDB.createObjectStore('restaurants', {
-          keyPath: 'id'
-      });
+        switch (upgradeDB.oldVersion){
+          case 0:
+          const rest = upgradeDB.createObjectStore('restaurants', {
+            keyPath: 'id'
+          });
+          case 1:
+          const reviews = upgradeDB.createObjectStore('reviews', {
+            keyPath: 'id'
+          });
+          reviews.createIndex('restaurant_id', 'restaurant_id', {
+            unique: false
+          });
+        }
     });
   }
-
-  /**
-   * Open IDB Database for Reviews
-   */
-   //check for browser support
-   static openReviewsDB() {
-     if (!('indexedDB' in window)) {
-     console.log('This browser doesn\'t support IndexedDB');
-     return;
-   }
-   // create database name and version and callback
-   return idb.open('review', 1 , function(upgradeDB) {
-     //create and returns a new object store or index
-      var store = upgradeDB.createObjectStore('reviews', {
-         keyPath: 'id'
-      });
-   });
- }
 
   /**
    * Show cached messages, by reading from the database opened above
