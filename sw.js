@@ -1,7 +1,7 @@
 self.addEventListener('install', function(event) {
   // Perform install steps
   event.waitUntil(
-    caches.open('my-site-cache-v1').then(function(cache) {
+    caches.open('my-site-cache-v2').then(function(cache) {
         console.log('Opened cache');
         return cache.addAll([
           '/',
@@ -14,9 +14,7 @@ self.addEventListener('install', function(event) {
           'index.html',
           'restaurant.html',
           'img/',
-          'css/final.css',
-          'css/styles.css',
-          'css/formmodal.css'
+          'css/styles.css'
         ]);
       })
   );
