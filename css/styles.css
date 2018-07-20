@@ -333,3 +333,232 @@ nav h1 a {
   color: #444343;
 	font-size: 1.12em;
 }
+
+/* ====================== Restaurant HomePage ====================== */
+
+body,
+header,
+main {
+  width: 100%;
+}
+
+body {
+	flex-wrap: wrap;
+}
+
+/* Header */
+
+header {
+  margin: auto;
+}
+
+nav h1 {
+	padding: 20px;
+}
+
+/* Section */
+
+#map-container {
+	position: relative;
+}
+
+.filter-options {
+	padding: 20px;
+}
+
+#restaurants-list {
+	display: block;
+	width: 100%;
+}
+
+#restaurants-list li {
+	padding: 20px 15px;
+	width: 40%;
+	float: left;
+}
+
+#restaurants-list li a{
+	border-radius: 4px;
+}
+
+#restaurants-list li a:focus,
+#restaurants-list li a:hover {
+  background: #c2185b;
+  color: #fff;
+  text-decoration: underline;
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, .14),
+              0 3px 1px -2px rgba(0, 0, 0, .2),
+              0 1px 5px 0 rgba(0, 0, 0, .12);
+}
+
+/* Footer */
+
+footer {
+  width: 100%;
+}
+
+/* Media Queries Restaurant Homepage */
+
+@media screen and (max-width: 443px){
+  .filter-options {
+    display: table;
+  }
+}
+
+@media screen and (max-width: 800px){
+  #restaurants-list li {
+  	width: 80%;
+    margin: 2px 20px;
+  }
+}
+
+/* ====================== Restaurant Detail Page ====================== */
+
+/* Section */
+
+#restaurant-img {
+	margin: 2px -40px;
+}
+
+#favorite-img {
+  float: right;
+  margin: 10px 65px;
+}
+figcaption {
+  font-style: italic;
+  margin: 2px -40px;
+}
+
+.inside #footer {
+  width: 100%;
+}
+
+/* Media Queries Restaurant Details Page */
+
+@media screen and (max-width: 799px) {
+  #restaurant-container {
+    order: -1;
+    width: 70%;
+    margin: 440px 0 0 0;
+  }
+
+  .inside #map-container {
+    width: 100%;
+    position: absolute;
+    max-height: 20%;
+  }
+
+  #reviews-container {
+    order: 1;
+    width: 70%;
+  }
+
+  #reviews-list li {
+    width: 100%
+  }
+
+  .inside #footer {
+    order: 2;
+    width: 91.5%;
+  }
+
+  #restaurant-address,
+  #restaurant-hours td,
+  #reviews-list li p {
+    font-size: 1.14em;
+  }
+}
+
+@media screen and (max-width: 550px) {
+    #reviews-container {
+      margin: 0 0 0 -30px;
+    }
+}
+
+/* Styles for form popup */
+#popUp{
+ 	font-size: 1em;
+  padding: 10px;
+	box-sizing: border-box;
+  border-radius: 4px;
+}
+
+#popUp:hover{
+	background-color: darkgrey;
+  color: white;
+  font-weight: bold;
+}
+
+/* The Modal (background) */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content/Box */
+.modal-content {
+  background-color: #fefefe;
+  margin: 15% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 40%;
+}
+
+/* The Close Button */
+.close {
+  color: #818080;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+/* Form Style */
+  input, textarea {
+	font-size: 1em;
+  width: 80%;
+  padding: 8px;
+  margin: 8px 60px;
+  box-sizing: border-box;
+  border-radius: 4px;
+}
+
+input[type=submit] {
+	width: 30%;
+}
+
+input[type=submit]:hover{
+	background-color: grey;
+  color: white;
+  font-weight: bold;
+}
+
+/* Media Queries for Modal Pop */
+
+@media screen and (max-width: 799px) {
+  .modal-content{
+    margin: 25% auto;
+    padding: 5px;
+    width: 70%;
+  }
+}
+
+@media screen and (max-width: 520px) {
+  .modal-content{
+    margin: 35% auto;
+    padding: 15px;
+  }
+}
