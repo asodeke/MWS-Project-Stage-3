@@ -69,15 +69,17 @@ fillRestaurantHTML = (restaurant = self.restaurant) => {
 
   if (self.restaurant.is_favorite == false) {
     favimage.src = "/img/favicon/unfavorite.webp";
+    fetch(`http://localhost:1337/restaurants/${self.restaurant.id}/?is_favorite=${favorite}`,
+      {
+        method: 'PUT'
+      });
   } else {
     favimage.src = "/img/favicon/favoriteon.webp";
     fetch(`http://localhost:1337/restaurants/${self.restaurant.id}/?is_favorite=${favorite}`,
-        {
-        method: 'PUT',
-        headers: {
-          'content-type': 'application/json'
-        }
+      {
+        method: 'PUT'
       });
+    favorite = true;
   }
 
   // fill operating hours
@@ -249,7 +251,7 @@ getParameterByName = (name, url) => {
 
 /**
   * Favorite / Unfavorite a Restaurant
-  
+
  favoriteRestaurant = (isFavorite) => {
     fetch(`http://localhost:1337/restaurants/${self.restaurant.id}/?is_favorite=${favorite}`,
         {
