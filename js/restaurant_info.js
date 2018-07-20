@@ -241,11 +241,16 @@ getParameterByName = (name, url) => {
 
     if (image.src.match("favoriteon")){
       image.src = "/img/favicon/unfavorite.webp";
+      /*fetch(url,{
+        method: 'DELETE',
+        headers: {
+          'content-type': 'application/json'
+        }
+      })
+      .then(response => response.json)*/
     } else {
       image.src = "/img/favicon/favoriteon.webp";
-    }
-    /*
-      fetch(url,{
+      /*fetch(url,{
         method: 'PUT',
         headers: {
           'content-type': 'application/json'
@@ -253,3 +258,4 @@ getParameterByName = (name, url) => {
       })
       .then(response => response.json)*/
     }
+  }
