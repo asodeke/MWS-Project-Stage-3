@@ -66,21 +66,23 @@ fillRestaurantHTML = (restaurant = self.restaurant) => {
   // Check is favorite property to load right image
   let favorite = false;
   const favimage = document.getElementById('favorite-img');
+  favimage.addEventListener("click", function(){
 
-  if (self.restaurant.is_favorite == false) {
-    favimage.src = "/img/favicon/unfavorite.webp";
-    fetch(`http://localhost:1337/restaurants/${self.restaurant.id}/?is_favorite=${favorite}`,
-      {
-        method: 'PUT'
-      });
-  } else {
-    favimage.src = "/img/favicon/favoriteon.webp";
-    fetch(`http://localhost:1337/restaurants/${self.restaurant.id}/?is_favorite=${favorite}`,
-      {
-        method: 'PUT'
-      });
-    favorite = true;
-  }
+    if (self.restaurant.is_favorite == false) {
+      favimage.src = "/img/favicon/unfavorite.webp";
+      fetch(`http://localhost:1337/restaurants/${self.restaurant.id}/?is_favorite=${favorite}`,
+        {
+          method: 'PUT'
+        });
+    } else {
+      favimage.src = "/img/favicon/favoriteon.webp";
+      fetch(`http://localhost:1337/restaurants/${self.restaurant.id}/?is_favorite=${favorite}`,
+        {
+          method: 'PUT'
+        });
+      favorite = true;
+    }
+  });
 
   // fill operating hours
   if (restaurant.operating_hours) {
