@@ -71,6 +71,13 @@ fillRestaurantHTML = (restaurant = self.restaurant) => {
     favimage.src = "/img/favicon/unfavorite.webp";
   } else {
     favimage.src = "/img/favicon/favoriteon.webp";
+    fetch(`http://localhost:1337/restaurants/${self.restaurant.id}/?is_favorite=${favorite}`,
+        {
+        method: 'PUT',
+        headers: {
+          'content-type': 'application/json'
+        }
+      });
   }
 
   // fill operating hours
@@ -242,7 +249,7 @@ getParameterByName = (name, url) => {
 
 /**
   * Favorite / Unfavorite a Restaurant
-  */
+  
  favoriteRestaurant = (isFavorite) => {
     fetch(`http://localhost:1337/restaurants/${self.restaurant.id}/?is_favorite=${favorite}`,
         {
@@ -252,4 +259,4 @@ getParameterByName = (name, url) => {
         }
       })
       .then(response => response.json)
-  }
+  */
