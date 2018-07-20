@@ -63,6 +63,16 @@ fillRestaurantHTML = (restaurant = self.restaurant) => {
   const cuisine = document.getElementById('restaurant-cuisine');
   cuisine.innerHTML = restaurant.cuisine_type;
 
+  // Check is favorite property to load right image
+  let favorite = false;
+  const favimage = document.getElementById('favorite-img');
+
+  if (self.restaurant.is_favorite == false) {
+    favimage.src = "/img/favicon/unfavorite.webp";
+  } else {
+    favimage.src = "/img/favicon/favoriteon.webp";
+  }
+
   // fill operating hours
   if (restaurant.operating_hours) {
     fillRestaurantHoursHTML();
@@ -233,29 +243,13 @@ getParameterByName = (name, url) => {
 /**
   * Favorite / Unfavorite a Restaurant
   */
-  function favoriteRestaurant(isFavorite){
-    var image =  document.getElementById('favorite-img');
-    //self.restaurant.is_favorite = isFavorite;
-
-    //const url = "http://localhost:1337/restaurants/" + self.restaurant.id + "/?is_favorite=" + isFavorite;
-
-    if (image.src.match("favoriteon")){
-      image.src = "/img/favicon/unfavorite.webp";
-      /*fetch(url,{
-        method: 'DELETE',
-        headers: {
-          'content-type': 'application/json'
-        }
-      })
-      .then(response => response.json)*/
-    } else {
-      image.src = "/img/favicon/favoriteon.webp";
-      /*fetch(url,{
+ favoriteRestaurant = (isFavorite) => {
+    fetch(`http://localhost:1337/restaurants/${self.restaurant.id}/?is_favorite=${favorite}`,
+        {
         method: 'PUT',
         headers: {
           'content-type': 'application/json'
         }
       })
-      .then(response => response.json)*/
-    }
+      .then(response => response.json)
   }
