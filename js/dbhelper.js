@@ -13,7 +13,7 @@ class DBHelper {
       return;
     }
     // create database name and version and callback
-    return idb.open('restaurants', 1 , upgradeDB => {
+    return idb.open('restaurants', 2 , upgradeDB => {
         //create and returns a new object store or index
         switch (upgradeDB.oldVersion){
           case 0:
