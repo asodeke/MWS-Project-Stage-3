@@ -82,7 +82,7 @@ class DBHelper {
    */
   static get DATABASE_URL() {
     const port = 1337 // Change this to your server port
-    return `http://localhost:${port}/restaurants/`;
+    return `http://localhost:${port}`;
   }
 
   /**
@@ -91,7 +91,7 @@ class DBHelper {
    //Got some assitance from my mentor Georgios writing this code
   static fetchRestaurants(callback) {
     //get restaurants from server
-    fetch(DBHelper.DATABASE_URL).then(response => response.json())
+    fetch(DBHelper.DATABASE_URL + '/restaurants/').then(response => response.json())
       //.then(restaurants => callback(null,restaurants))
       .then(restaurants =>
             //add the restaurants to the server
@@ -99,6 +99,25 @@ class DBHelper {
       ).then(restaurants =>
             //send the restaurants to callback to update the UI
             callback(null, restaurants)
+      ).catch(err => {
+        //catch any error
+        callback(err,null);
+      });
+    //});
+  }
+
+  /**
+   * Fetch all reviews.
+   */
+  static fetchReviews(callback) {
+    //get review from server
+    fetch(DBHelper.DATABASE_URL + '/reviews/').then(response => response.json())
+      .then(reviews =>
+            //add the review to the server
+            DBHelper.getReviewsByRestaurantId(reviews)
+      ).then(reviews =>
+            //send the review to callback to update the UI
+            callback(null, reviews)
       ).catch(err => {
         //catch any error
         callback(err,null);
