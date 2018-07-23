@@ -139,6 +139,23 @@ nav h1 a {
   background-color: #ccc;
 }
 
+#button {
+	padding: 10px;
+  font-weight: bold;
+  border-radius: 4px;
+  font-size: 1.2em;
+  letter-spacing: 2px;
+	margin: 20px -50px;
+	position: relative;
+	left: 50%;
+}
+
+#button:hover{
+	background-color: #3397db;
+    color: white;
+    text-decoration: underline;
+}
+
 /* ====================== Restaurant Filtering ====================== */
 .filter-options {
   /*width: 100%;*/
@@ -368,7 +385,6 @@ nav h1 {
 
 #restaurants-list {
 	display: block;
-	width: 100%;
 }
 
 #restaurants-list li {
