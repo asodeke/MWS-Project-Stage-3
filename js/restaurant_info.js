@@ -60,15 +60,24 @@ fillRestaurantHTML = (restaurant = self.restaurant) => {
   image.src = DBHelper.imageUrlForRestaurant(restaurant);
   image.setAttribute("alt", "Restaurant Picture");
 
+  const favimage = document.getElementById('favorite-img');
+
   const cuisine = document.getElementById('restaurant-cuisine');
   cuisine.innerHTML = restaurant.cuisine_type;
 
   // Check is favorite property to load right image
+  if(self.restaurant.is_favorite == false) {
+    favimage.src = "/img/favicon/unfavorite.webp";
+  } else {
+    favimage.src = "/img/favicon/favoriteon.webp";
+  }
+
+  //Add click EventListener to toggle favorite
   let favorite = false;
-  const favimage = document.getElementById('favorite-img');
+
   favimage.addEventListener("click", function(){
 
-    if (self.restaurant.is_favorite == false) {
+    if (self.restaurant.is_favorite == true) {
       favimage.src = "/img/favicon/unfavorite.webp";
       fetch(`http://localhost:1337/restaurants/${self.restaurant.id}/?is_favorite=${favorite}`,
         {
@@ -76,11 +85,11 @@ fillRestaurantHTML = (restaurant = self.restaurant) => {
         });
     } else {
       favimage.src = "/img/favicon/favoriteon.webp";
+      favorite = true;
       fetch(`http://localhost:1337/restaurants/${self.restaurant.id}/?is_favorite=${favorite}`,
         {
           method: 'PUT'
         });
-      favorite = true;
     }
   });
 
