@@ -265,5 +265,4 @@ class DBHelper {
     );
     return marker;
   }
-
 }
