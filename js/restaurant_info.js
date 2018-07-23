@@ -58,6 +58,7 @@ fillRestaurantHTML = (restaurant = self.restaurant) => {
   const image = document.getElementById('restaurant-img');
   image.className = 'restaurant-img'
   image.src = DBHelper.imageUrlForRestaurant(restaurant);
+  image.setAttribute("data-src", `/img/${restaurant.photograph}.webp`)
   image.setAttribute("alt", "Restaurant Picture");
 
   const favimage = document.getElementById('favorite-img');
