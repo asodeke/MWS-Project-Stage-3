@@ -42,8 +42,7 @@
     </section>
   </main>
 
-  <!-- Add indexDB Promise library -->
-  <!-- Add functionality to display map onload -->
+  <!-- Add functionality to hide map onload -->
   <script>
   function displayMap() {
     const hide = document.getElementById("map");
@@ -53,6 +52,10 @@
       hide.style.display = "block";
   }
   </script>
+  <!-- jQuery library for lazy loading -->
+  <script src="jquery.js"></script>
+  <script src="jquery.lazyloadxt.js"></script>
+  <!-- Add indexDB Promise library -->
   <script type="application/javascript" charset="utf-8" src="js/idb.js"></script>
   <script type="application/javascript" charset="utf-8" src="js/dbhelper.js"></script>
   <script type="application/javascript" charset="utf-8" src="js/main.js"></script>
