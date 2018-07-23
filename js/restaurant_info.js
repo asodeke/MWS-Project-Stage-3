@@ -259,17 +259,3 @@ getParameterByName = (name, url) => {
         body.style.overflow = "scroll";
     }
   }
-
-/**
-  * Favorite / Unfavorite a Restaurant
-
- favoriteRestaurant = (isFavorite) => {
-    fetch(`http://localhost:1337/restaurants/${self.restaurant.id}/?is_favorite=${favorite}`,
-        {
-        method: 'PUT',
-        headers: {
-          'content-type': 'application/json'
-        }
-      })
-      .then(response => response.json)
-  */
