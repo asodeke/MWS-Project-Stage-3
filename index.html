@@ -9,6 +9,11 @@
   <link rel="manifest" href="/manifest.json">
   <meta name="theme-color" content="#3397DB">
   <title>Restaurant Reviews</title>
+  <style>
+    #map {
+      display: none;
+    }
+  </style>
 </head>
 
 <body>
@@ -20,6 +25,7 @@
 
   <main id="maincontent">
     <section id="map-container">
+      <button id="button" onclick="displayMap()"> DISPLAY MAP </button>
       <div id="map"></div>
     </section>
     <section>
@@ -37,6 +43,16 @@
   </main>
 
   <!-- Add indexDB Promise library -->
+  <!-- Add functionality to display map onload -->
+  <script>
+  function displayMap() {
+    const hide = document.getElementById("map");
+    const button = document.getElementById("button");
+
+      button.style.display = "none";
+      hide.style.display = "block";
+  }
+  </script>
   <script type="application/javascript" charset="utf-8" src="js/idb.js"></script>
   <script type="application/javascript" charset="utf-8" src="js/dbhelper.js"></script>
   <script type="application/javascript" charset="utf-8" src="js/main.js"></script>
