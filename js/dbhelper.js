@@ -67,7 +67,7 @@ class DBHelper {
         // add all the reviews to indexDB
         return Promise.all(reviews.map(review =>
           store.put(review))).then(() => {
-            return reviews
+            return reviews;
           })
         .catch (() => {
           tx.abort();
