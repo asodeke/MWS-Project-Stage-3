@@ -54,9 +54,9 @@ class DBHelper {
     }
 
   /**
-    * Get Reviews for Restuarant by id
+    * Read reviews from the database
     */
-    static getReviewsByRestaurantId(reviews){
+    static cacheReviewsByRestaurantId(reviews){
       return DBHelper.openDatabase().then(db =>{
         if(!db) return;
 
@@ -109,12 +109,12 @@ class DBHelper {
   /**
    * Fetch all reviews.
    */
-  static fetchReviews(callback) {
+  static fetchReviewsByRestaurantId(id, callback) {
     //get review from server
-    fetch(DBHelper.DATABASE_URL + '/reviews/').then(response => response.json())
+    fetch(DBHelper.DATABASE_URL + `/reviews/?restaurant_id=${id}`).then(response => response.json())
       .then(reviews =>
             //add the review to the server
-            DBHelper.getReviewsByRestaurantId(reviews)
+            DBHelper.cacheReviewsByRestaurantId(reviews)
       ).then(reviews =>
             //send the review to callback to update the UI
             callback(null, reviews)
