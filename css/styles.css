@@ -415,7 +415,7 @@ footer {
 
 /* Media Queries Restaurant Homepage */
 
-@media screen and (max-width: 443px){
+@media screen and (max-width: 483px){
   .filter-options {
     display: table;
   }
