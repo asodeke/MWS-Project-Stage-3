@@ -20,9 +20,11 @@
       <h1><a href="/">Restaurant Reviews</a></h1>
     </nav>
     <!-- Beginning breadcrumb -->
-    <ul id="breadcrumb" >
-      <li><a href="/" aria-label="Click to view details about restaurant">Home</a></li>
-    </ul>
+    <nav aria-label="Breadcrumb" id="breadcrumb">
+      <ul>
+        <li><a href="/" aria-label="Click to view details about restaurant">Home</a></li>
+      </ul>
+    </nav>
     <!-- End breadcrumb -->
     <!-- End nav -->
   </header>
@@ -37,8 +39,8 @@
     <!-- End map -->
     <!-- Beginning restaurant -->
     <section id="restaurant-container">
-      <h1 id="restaurant-name"></h1>
-      <img id="favorite-img" src="img/favicon/unfavorite.webp" alt="Favorite Icon">
+      <h2 id="restaurant-name"></h1>
+      <img id="favorite-img" src="img/favicon/unfavorite.webp" alt="Favorite Icon" role="icon" aria-label="favorite/unfavorite item">
       <figure>
         <img id="restaurant-img">
         <figcaption> View of the Restaurant </figcaption>
@@ -58,7 +60,7 @@
           <!-- Form Start here -->
           <div class="modal-content">
           <span class="close">&times;</span>
-            <form action="http://localhost:1337/reviews/" id="form" method="POST" name="form">
+            <form action="" id="form" name="form">
               <input type="hidden" name="restaurant_id" id="restaurant_id" value="" />
               <input id="username" name="username" placeholder="Enter Username" type="text" required>
               <br>
@@ -66,7 +68,7 @@
               <br>
               <textarea id="comment" name="comment" rows="9" placeholder="Enter a Review" required></textarea>
               <br>
-              <input type="submit">
+              <input type="submit" onlcick="postReview()">
           </div>
         </div>
     </section>
