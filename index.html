@@ -32,13 +32,16 @@
       <div class="filter-options">
         <h2>Filter Results</h2>
           <select id="neighborhoods-select" name="neighborhoods" aria-labelledby="neighborhoods-select" onchange="updateRestaurants()">
-            <option value="all">All Neighborhoods</option>
+            <option value="all">Pick a Neighborhood</option>
           </select>
           <select id="cuisines-select" name="cuisines" aria-labelledby="cuisines-select" onchange="updateRestaurants()">
-            <option value="all">All Cuisines</option>
+            <option value="all">Pick a Cuisine</option>
           </select>
       </div>
       <ul id="restaurants-list"></ul>
+      <!--
+      <img id="favorite-img" src="img/favicon/unfavorite.webp" alt="Favorite Icon" role="icon" aria-label="favorite/unfavorite item">
+      -->
     </section>
   </main>
 
