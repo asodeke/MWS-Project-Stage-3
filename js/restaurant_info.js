@@ -56,42 +56,51 @@ fillRestaurantHTML = (restaurant = self.restaurant) => {
   address.innerHTML = restaurant.address;
 
   const image = document.getElementById('restaurant-img');
-  image.className = 'restaurant-img'
+  image.className = 'restaurant-img';
   image.src = DBHelper.imageUrlForRestaurant(restaurant);
-  image.setAttribute("data-src", `/img/${restaurant.photograph}.webp`)
+  image.setAttribute("data-src", `/img/${restaurant.photograph}.webp`);
   image.setAttribute("alt", "Restaurant Picture");
 
   const favimage = document.getElementById('favorite-img');
 
+  function getImagePath(){
+    if(restaurant.is_favorite == false) {
+      return (`/img/favicon/unfavorite.webp`);
+    } else if (restaurant.is_favorite == true) {
+      return (`/img/favicon/favoriteon.webp`);
+    }
+  }
+
+
   const cuisine = document.getElementById('restaurant-cuisine');
   cuisine.innerHTML = restaurant.cuisine_type;
 
-  // Check is favorite property to load right image
-  if(self.restaurant.is_favorite == false) {
-    favimage.src = "/img/favicon/unfavorite.webp";
-  } else {
-    favimage.src = "/img/favicon/favoriteon.webp";
-  }
-
   //Add click EventListener to toggle favorite
-  let favorite = false;
-
+  //let favorite;
+  //console.log(self.restaurant.is_favorite);
   favimage.addEventListener("click", function(){
-
     if (self.restaurant.is_favorite == true) {
       favimage.src = "/img/favicon/unfavorite.webp";
-      fetch(`http://localhost:1337/restaurants/${self.restaurant.id}/?is_favorite=${favorite}`,
+      self.restaurant.is_favorite = false;
+      fetch(`http://localhost:1337/restaurants/${self.restaurant.id}/?is_favorite=${self.restaurant.is_favorite}`,
         {
           method: 'PUT'
         });
+        console.log(self.restaurant.is_favorite);
     } else {
-      favimage.src = "/img/favicon/favoriteon.webp";
-      favorite = true;
-      fetch(`http://localhost:1337/restaurants/${self.restaurant.id}/?is_favorite=${favorite}`,
+      favimage.src = "/img/favicon/favoriteon.webp"
+      self.restaurant.is_favorite = true;
+      fetch(`http://localhost:1337/restaurants/${self.restaurant.id}/?is_favorite=${self.restaurant.is_favorite}`,
         {
           method: 'PUT'
         });
+        console.log(self.restaurant.is_favorite);
     }
+/*
+    fetch(`http://localhost:1337/restaurants/${self.restaurant.id}/?is_favorite=${favorite}`,
+      {
+        method: 'PUT'
+      });*/
   });
 
   // fill operating hours

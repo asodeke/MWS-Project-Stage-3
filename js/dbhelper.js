@@ -251,6 +251,16 @@ class DBHelper {
   static imageUrlForRestaurant(restaurant) {
     return (`/img/${restaurant.photograph}.webp`);
   }
+/*
+  function faviconImageForRestaurant(restaurant){
+    // Check if is favorite property to load right image
+    if(restaurant.is_favorite == false) {
+      return (`/img/favicon/unfavorite.webp`);
+    } else if (restaurant.is_favorite == true) {
+      return (`/img/favicon/favoriteon.webp`);
+    }
+  }*/
+
 
   /**
    * Map marker for a restaurant.
