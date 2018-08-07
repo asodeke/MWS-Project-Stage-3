@@ -211,14 +211,14 @@ getParameterByName = (name, url) => {
   * Post Review
   */
   //postReview = (restaurantId) => {
-  postReview => {
-    const restaurantId = getParameterByName('id');
+  function postReview(restaurantId) {
+    const id = getParameterByName('id');
     const username = document.getElementById("username").value;
     const rating = document.getElementById("ratings").value;
     const comment = document.getElementById("comment").value;
 
   const review = {
-    "restaurant_id": restaurantId,
+    "restaurant_id": id,
     "name": username,
     "rating": rating,
     "comments": comment,
@@ -237,6 +237,8 @@ getParameterByName = (name, url) => {
       .catch(error => {
         console.log(error);
     });
+    location.reload();
+    console.log(restaurantId);
   }
 
 /**
