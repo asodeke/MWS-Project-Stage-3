@@ -222,7 +222,6 @@ fillBreadcrumb = (restaurant=self.restaurant) => {
     "comments": comment
   }
   console.log(review);
-  DBHelper.postReview();
   //debugger;
 
   fetch(DBHelper.DATABASE_URL+'/reviews', {
@@ -245,7 +244,6 @@ fillBreadcrumb = (restaurant=self.restaurant) => {
   .catch(error => console.error(`Fetch Error =\n`, error));
   //debugger;
   }
-
 
 /**
   * Add functionality to make review form popup

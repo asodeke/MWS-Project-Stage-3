@@ -72,30 +72,6 @@ class DBHelper {
     });
    }
 
-   /**
-    * Post each review using the fetch method
-    */
-    static postReview(review){
-      fetch(DBHelper.DATABASE_URL+'/reviews', {
-        method: "POST", // *GET, POST, PUT, DELETE, etc.
-        headers: {
-          "Accept": "application/json",
-          "Content-Type": "application/json; charset=utf-8",
-        },
-        redirect: "follow", // manual, *follow, error
-        referrer: "no-referrer", // no-referrer, *client
-        body: JSON.stringify(review), // body data type must match "Content-Type" header
-      }).then(function(response) {
-          console.log(response.json);
-          //return response.json();
-          return DBHelper.urlForRestaurant(restaurant);
-      }).then(function (json){
-          console.log(json);
-      }).catch(error => console.error(`Fetch Error =\n`, error));
-      //debugger;
-      addReviews(review);
-    }
-
   /**
    * Show cached messages, by reading from the database opened above
    */
