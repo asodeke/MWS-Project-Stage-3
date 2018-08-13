@@ -4,6 +4,15 @@
 class DBHelper {
 
   /**
+   * Database URL.
+   * Change this to restaurants.json file location on your server.
+   */
+  static get DATABASE_URL() {
+    const port = 1337 // Change this to your server port
+    return `http://localhost:${port}`;
+  }
+
+  /**
    * Open IDB Database
    */
   static openDatabase() {
@@ -12,6 +21,7 @@ class DBHelper {
       console.log('This browser doesn\'t support IndexedDB');
       return;
     }
+
     // create database name and version and callback
     return idb.open('restaurants', 2 , upgradeDB => {
         //create and returns a new object store or index
@@ -30,6 +40,61 @@ class DBHelper {
         }
     });
   }
+
+  /**
+   *  Add reviews function
+   */
+   static addReviews(review) {
+     //check for browser support
+     if (!('indexedDB' in window)) {
+       console.log('This browser doesn\'t support IndexedDB');
+       return;
+     }
+
+     const dbPromise = idb.open('review-rest', 1 , function(upgradeDB) {
+       const store = upgradeDB.createObjectStore('reviews', {
+         keyPath: 'id'
+       });
+    });
+
+    this._dbPromise.then(function (db) {
+      if(!db) return;
+
+      const tx = db.transaction('reviews', 'readwrite');
+      const store = tx.objectStore('reviews');
+      store.put(review);
+      return tx.complete;
+    }).then(function () {
+      console.log('Review Added');
+    }).catch(function () {
+      tx.abort();
+      throw ('Reviews were not added');
+    });
+   }
+
+   /**
+    * Post each review using the fetch method
+    */
+    static postReview(review){
+      fetch(DBHelper.DATABASE_URL+'/reviews', {
+        method: "POST", // *GET, POST, PUT, DELETE, etc.
+        headers: {
+          "Accept": "application/json",
+          "Content-Type": "application/json; charset=utf-8",
+        },
+        redirect: "follow", // manual, *follow, error
+        referrer: "no-referrer", // no-referrer, *client
+        body: JSON.stringify(review), // body data type must match "Content-Type" header
+      }).then(function(response) {
+          console.log(response.json);
+          //return response.json();
+          return DBHelper.urlForRestaurant(restaurant);
+      }).then(function (json){
+          console.log(json);
+      }).catch(error => console.error(`Fetch Error =\n`, error));
+      //debugger;
+      addReviews(review);
+    }
 
   /**
    * Show cached messages, by reading from the database opened above
@@ -75,15 +140,6 @@ class DBHelper {
         });
       });
     }
-
-  /**
-   * Database URL.
-   * Change this to restaurants.json file location on your server.
-   */
-  static get DATABASE_URL() {
-    const port = 1337 // Change this to your server port
-    return `http://localhost:${port}`;
-  }
 
   /**
    * Fetch all restaurants.
@@ -251,16 +307,6 @@ class DBHelper {
   static imageUrlForRestaurant(restaurant) {
     return (`/img/${restaurant.photograph}.webp`);
   }
-/*
-  function faviconImageForRestaurant(restaurant){
-    // Check if is favorite property to load right image
-    if(restaurant.is_favorite == false) {
-      return (`/img/favicon/unfavorite.webp`);
-    } else if (restaurant.is_favorite == true) {
-      return (`/img/favicon/favoriteon.webp`);
-    }
-  }*/
-
 
   /**
    * Map marker for a restaurant.
