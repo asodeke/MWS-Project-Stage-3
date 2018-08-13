@@ -109,10 +109,9 @@ fillRestaurantHTML = (restaurant = self.restaurant) => {
   }
   // fill reviews
   //fillReviewsHTML();
-  DBHelper.fetchReviewsByRestaurantId(self.restaurant.id, (error, reviews)=> {
-    self.reviews=reviews;
+  //DBHelper.fetchReviewsByRestaurantId(self.restaurant.id, (error, reviews)=> {
+    //self.reviews=reviews;
     fillReviewsHTML();
-  });
 }
 
 /**
@@ -194,25 +193,24 @@ fillBreadcrumb = (restaurant=self.restaurant) => {
 /**
  * Get a parameter by name from page URL.
  */
-getParameterByName = (name, url) => {
-  if (!url)
-    url = window.location.href;
-  name = name.replace(/[\[\]]/g, '\\$&');
-  const regex = new RegExp(`[?&]${name}(=([^&#]*)|&|#|$)`),
-    results = regex.exec(url);
-  if (!results)
-    return null;
-  if (!results[2])
-    return '';
-  return decodeURIComponent(results[2].replace(/\+/g, ' '));
-}
+ function getParameterByName (name, url) {
+   if (!url)
+     url = window.location.href;
+   name = name.replace(/[\[\]]/g, '\\$&');
+   const regex = new RegExp(`[?&]${name}(=([^&#]*)|&|#|$)`),
+     results = regex.exec(url);
+   if (!results)
+     return null;
+   if (!results[2])
+     return '';
+   return decodeURIComponent(results[2].replace(/\+/g, ' '));
+ }
 
 /**
   * Post Review
   */
-  //postReview = (restaurantId) => {
-  function postReview(restaurantId) {
-    const id = getParameterByName('id');
+  function Review() {
+    const id = getParameterByName('id'); //document.getElementById("restaurant_id");//getParameterByName('id');
     const username = document.getElementById("username").value;
     const rating = document.getElementById("ratings").value;
     const comment = document.getElementById("comment").value;
@@ -221,25 +219,33 @@ getParameterByName = (name, url) => {
     "restaurant_id": id,
     "name": username,
     "rating": rating,
-    "comments": comment,
+    "comments": comment
+  }
+  console.log(review);
+  DBHelper.postReview();
+  //debugger;
+
+  fetch(DBHelper.DATABASE_URL+'/reviews', {
+    method: "POST", // *GET, POST, PUT, DELETE, etc.
+    headers: {
+      "Accept": "application/json",
+      "Content-Type": "application/json; charset=utf-8",
+    },
+    redirect: "follow", // manual, *follow, error
+    referrer: "no-referrer", // no-referrer, *client
+    body: JSON.stringify(review), // body data type must match "Content-Type" header
+  }).then(function(response) {
+      console.log(response.json);
+      //return response.json();
+      return DBHelper.urlForRestaurant(restaurant);
+  })
+  .then(function (json){
+      console.log(json);
+  })
+  .catch(error => console.error(`Fetch Error =\n`, error));
+  //debugger;
   }
 
-  fetch('http://localhost:1337/reviews/', {
-    method: 'POST',
-    body: JSON.stringify(review),
-    headers: {
-        'content-type': 'application/json'
-      }
-    }).then(response => response.json())
-      .then(response => {
-        console.log(response);
-      })
-      .catch(error => {
-        console.log(error);
-    });
-    location.reload();
-    console.log(restaurantId);
-  }
 
 /**
   * Add functionality to make review form popup
