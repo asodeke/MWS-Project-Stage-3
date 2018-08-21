@@ -180,11 +180,33 @@ addMarkersToMap = (restaurants = self.restaurants) => {
 }
 
 /**
-  *Register a Service Worker
+  *Register a Service Worker & Sync Event
 `*/
 if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('./sw.js')
+    .then(registration => {
+        console.log('Service Worker Registered');
+    })
+    .catch(err => {
+      console.log(`ServiceWorker registration failed: ${err}`);
+    });
+  });
+}
+
+// Activate Background-Sync with ServiceWorkerReady
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.ready.then(swRegistration => {
+    return swRegistration.sync.register('sync-reviews');
+  });
+}
+
+/*
+if ('serviceWorker' in navigator && 'SyncManager' in window) {
   window.addEventListener('load', function() {
-    navigator.serviceWorker.register('/sw.js').then(function(registration) {
+    navigator.serviceWorker.register('/sw.js')
+      .then(function(registration) {
+        navigator.serviceWorker.ready;
       // Registration was successful
       console.log('ServiceWorker registration successful with scope: ', registration.scope);
     }, function(err) {
@@ -192,4 +214,4 @@ if ('serviceWorker' in navigator) {
       console.log('ServiceWorker registration failed: ', err);
     });
   });
-}
+}*/
