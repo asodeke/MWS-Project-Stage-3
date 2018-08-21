@@ -288,12 +288,13 @@ nav h1 a {
   text-transform: uppercase;
   line-height: 1.1;
 	padding: 15px 0 0 0;
+	display: inline-block;
 }
 
 #favorite-img {
 	float: right;
-	margin: -40px 100px;
-	width: 5%;
+	margin: 25px 130px;
+	width: 4.5%;
 }
 
 #restaurant-img {
@@ -349,9 +350,10 @@ nav h1 a {
   list-style-type: none;
   margin: 0 0 30px;
   overflow: hidden;
-  padding: 2px 20px 20px;
+  padding: 5px 10px 5px;
   position: relative;
   width: 85%;
+	font-size: 1.1em;
 }
 
 #reviews-list li p {
@@ -521,6 +523,12 @@ footer {
 	margin: 2px -40px;
 }
 
+#hours-header {
+	font-size: 1.5em;
+	color: red;
+	margin: auto;
+}
+
 figcaption {
   font-style: italic;
   margin: 2px -40px;
@@ -532,11 +540,27 @@ figcaption {
 
 /* Media Queries Restaurant Details Page */
 
+@media screen and (max-width: 1341px) and (min-width: 800px) {
+	#restaurant-name {
+		margin: 10px 200px 7px 0px;
+	}
+
+	#favorite-img {
+		margin: -35px 140px;
+	}
+}
+
+@media screen and (max-width: 799px) {
+	input, textarea {
+		width: 100%;
+	}
+}
+
 @media screen and (max-width: 799px) {
   #restaurant-container {
     order: -1;
-    width: 70%;
-    margin: 440px 0 0 0;
+    width: 80%;
+    margin: 300px 0 0 0;
   }
 
   .inside #map-container {
@@ -549,6 +573,11 @@ figcaption {
     order: 1;
     width: 70%;
   }
+
+	#favorite-img {
+		margin: -37px 130px;
+		width: 4%;
+	}
 
   #reviews-list li {
     width: 100%
@@ -564,98 +593,64 @@ figcaption {
   #reviews-list li p {
     font-size: 1.14em;
   }
+
+	/* Form Media Query */
+	#myModal {
+		width: 92%;
+		margin: auto;
+	}
+	/*
+	input {
+		width: 100%;
+	}*/
 }
 
-@media screen and (max-width: 550px) {
-    #reviews-container {
-      margin: 0 0 0 -30px;
-    }
+@media screen and (max-width: 680px) {
+		#restaurant-name {
+			margin: 10px 150px 8px 0px;
+		}
+
+		#favorite-img {
+			margin: -33px 125px;
+		}
 }
 
-/* Styles for form popup */
-#popUp{
- 	font-size: 1em;
-  padding: 10px;
-	box-sizing: border-box;
-  border-radius: 4px;
+@media screen and (max-width: 450px) {
+	#restaurant-name {
+		margin: -10px 150px 8px 0px;
+	}
+	/*
+	input, textarea {
+		width: 100%;
+	}*/
 }
 
-#popUp:hover{
-	background-color: darkgrey;
-  color: white;
-  font-weight: bold;
-}
-
-/* The Modal (background) */
+/* The Modal*/
 .modal {
-  display: none; /* Hidden by default */
-  position: fixed; /* Stay in place */
-  z-index: 1; /* Sit on top */
-  left: 0;
-  top: 0;
-  width: 100%; /* Full width */
-  height: 100%; /* Full height */
-  background-color: rgb(0,0,0); /* Fallback color */
-  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+	width: 90%
 }
 
-/* Modal Content/Box */
-.modal-content {
-  background-color: #fefefe;
-  margin: 15% auto;
-  padding: 20px;
-  border: 1px solid #888;
-  width: 40%;
-}
-
-/* The Close Button */
-.close {
-  color: #818080;
-  float: right;
-  font-size: 28px;
-  font-weight: bold;
-}
-
-.close:hover,
-.close:focus {
-  color: black;
-  text-decoration: none;
-  cursor: pointer;
-}
+/* Lable */
+	label {
+		font-size: 1.2em;
+	}
 
 /* Form Style */
   input, textarea {
 	font-size: 1em;
   width: 80%;
   padding: 8px;
-  margin: 8px 60px;
+  margin: 8px 40px;
   box-sizing: border-box;
   border-radius: 4px;
 }
 
-input[type=submit] {
+input[type=button] {
 	width: 30%;
 }
 
-input[type=submit]:hover{
+input[type=button]:hover{
 	background-color: grey;
   color: white;
   font-weight: bold;
-}
-
-/* Media Queries for Modal Pop */
-
-@media screen and (max-width: 799px) {
-  .modal-content{
-    margin: 25% auto;
-    padding: 5px;
-    width: 70%;
-  }
-}
-
-@media screen and (max-width: 520px) {
-  .modal-content{
-    margin: 35% auto;
-    padding: 15px;
-  }
 }
