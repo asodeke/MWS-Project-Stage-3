@@ -139,11 +139,12 @@ class DBHelper {
   }
 
   /**
-   * Fetch all reviews.
+   * Fetch all review
    */
-  static fetchReviews(callback) {
-    //get review from server
-    fetch(DBHelper.DATABASE_URL + `/reviews/`).then(response => response.json())
+   static fetchReviews(id, callback) {
+     //get review from server
+    fetch(DBHelper.DATABASE_URL + `/reviews/?restaurant_id=${id}`)
+    .then(response => response.json())
       .then(reviews =>
             //add the review to the server
             DBHelper.cacheReviews(reviews)
@@ -153,9 +154,11 @@ class DBHelper {
       ).catch(err => {
         //catch any error
         callback(err,null);
+        //console.log(err,null);
       });
     //});
-  }
+   }
+
 
   //Got some assitance from my mentor Georgios writing this code
   /**
