@@ -47,30 +47,31 @@
       </figure>
       <p id="restaurant-cuisine"></p>
       <p id="restaurant-address"></p>
+      <p id="hours-header"> Hours </p>
       <table id="restaurant-hours"></table>
     </section>
     <!-- end restaurant -->
     <!-- Beginning reviews -->
     <section id="reviews-container">
-      <ul id="reviews-list"></ul>
-        <!-- Display popup button -->
-        <button id="popUp">Write a Review</button>
         <!-- Form Modal -->
         <div id="myModal" class="modal">
           <!-- Form Start here -->
           <div class="modal-content">
-          <span class="close">&times;</span>
             <form id="form" action="" name="form">
-              <!--<input type="hidden" name="restaurant_id" id="restaurant_id" value="" />-->
+              <label for="username"> Username: </label>
               <input id="username" name="username" placeholder="Enter Username" type="text" required>
               <br>
+              <label for="ratings"> Ratings: </label>
               <input id="ratings" name="ratings" min="0" max="5" placeholder="Enter a rating out of 5" type="text" required>
               <br>
+              <label for="comment"> Comment: </label>
               <textarea id="comment" name="comment" rows="9" placeholder="Enter a Review" required></textarea>
               <br>
-              <input type="submit" onclick="Review()">
+              <input type="button" value="Submit" onclick="Review()">
+            </form>
           </div>
         </div>
+        <ul id="reviews-list"></ul>
     </section>
     <!-- End reviews -->
   </main>
