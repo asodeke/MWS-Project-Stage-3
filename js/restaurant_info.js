@@ -23,30 +23,27 @@ window.initMap = () => {
 /**
  * Get current restaurant from page URL.
  */
-fetchRestaurantFromURL = (callback) => {
-  if (self.restaurant) { // restaurant already fetched!
-    callback(null, self.restaurant)
-    return;
-  }
-  const id = getParameterByName('id');
-  if (!id) { // no id found in URL
-    error = 'No restaurant id in URL'
-    callback(error, null);
-  } else {
-    DBHelper.fetchReviews((error, reviews) => {
-      self.reviews = reviews.filter(review => review.restaurant_id == id);
-    });
-    DBHelper.fetchRestaurantById(id, (error, restaurant) => {
-      self.restaurant = restaurant;
-      if (!restaurant) {
-        console.error(error);
-        return;
-      }
-      fillRestaurantHTML();
-      callback(null, restaurant)
-    });
-  }
-}
+ fetchRestaurantFromURL = (callback) => {
+   if (self.restaurant) { // restaurant already fetched!
+     callback(null, self.restaurant)
+     return;
+   }
+   const id = getParameterByName('id');
+   if (!id) { // no id found in URL
+     error = 'No restaurant id in URL'
+     callback(error, null);
+   } else {
+     DBHelper.fetchRestaurantById(id, (error, restaurant) => {
+       self.restaurant = restaurant;
+       if (!restaurant) {
+         console.error(error);
+         return;
+       }
+       fillRestaurantHTML();
+       callback(null, restaurant)
+     });
+   }
+ }
 
 /**
  * Create restaurant HTML and add it to the webpage
@@ -141,7 +138,7 @@ fillRestaurantHoursHTML = (operatingHours = self.restaurant.operating_hours) => 
  * Create all reviews HTML and add them to the webpage.
  */
 fillReviewsHTML = (reviews = self.restaurant.reviews) => {
-  const container = document.getElementById('reviews-container');
+  const container = document.getElementById('reviews-list');
   const title = document.createElement('h2');
   title.innerHTML = 'Reviews';
   container.appendChild(title);
@@ -164,12 +161,14 @@ fillReviewsHTML = (reviews = self.restaurant.reviews) => {
  */
 createReviewHTML = (review) => {
   const li = document.createElement('li');
+
   const name = document.createElement('p');
-  name.innerHTML = review.name;
+  name.innerHTML = `UserName: ${review.name}`;
   li.appendChild(name);
 
   const date = document.createElement('p');
-  date.innerHTML = review.date;
+  //date.innerHTML = review.date;
+  date.innerHTML = `Date: ${new Date(review.createAt).toDateString()}`;
   li.appendChild(date);
 
   const rating = document.createElement('p');
@@ -177,7 +176,7 @@ createReviewHTML = (review) => {
   li.appendChild(rating);
 
   const comments = document.createElement('p');
-  comments.innerHTML = review.comments;
+  comments.innerHTML = `Comment: ${review.comments}`;
   li.appendChild(comments);
 
   return li;
@@ -213,73 +212,62 @@ fillBreadcrumb = (restaurant=self.restaurant) => {
   * Post Review
   */
   function Review() {
-    const id = getParameterByName('id'); //document.getElementById("restaurant_id");//getParameterByName('id');
-    const username = document.getElementById("username").value;
-    const rating = document.getElementById("ratings").value;
-    const comment = document.getElementById("comment").value;
+    const id = getParameterByName('id');
+    const username = document.getElementById("username");
+    const rating = document.getElementById("ratings");
+    const comment = document.getElementById("comment");
+
+    //check for no input from user
+    if(username == '' || rating == '' || comment == '') {
+      alert("Please fill all the required field");
+      return false;
+    }
 
   const review = {
     "restaurant_id": id,
-    "name": username,
-    "rating": rating,
-    "comments": comment
+    "name": username.value,
+    "rating": rating.value,
+    "comments": comment.value,
+    "createAt" : Date.now(),
+    "updatedAt": Date.now()
   }
-  console.log(review);
-  //debugger;
-
-  fetch(DBHelper.DATABASE_URL+'/reviews', {
+  const postReview = createReviewHTML(review);
+  const ul = document.getElementById('reviews-list');
+  ul.appendChild(postReview);
+  /*`/reviews/?restaurant_id=${id}`*/
+  fetch(DBHelper.DATABASE_URL+'/reviews/', {
     method: "POST", // *GET, POST, PUT, DELETE, etc.
+    body: JSON.stringify(review), // body data type must match "Content-Type" header
     headers: {
       "Accept": "application/json",
       "Content-Type": "application/json; charset=utf-8",
     },
     redirect: "follow", // manual, *follow, error
     referrer: "no-referrer", // no-referrer, *client
-    body: JSON.stringify(review), // body data type must match "Content-Type" header
-  }).then(function(response) {
-      console.log(response.json);
-      //return response.json();
-      return DBHelper.urlForRestaurant(restaurant);
+  }).then(response => {
+    response.json()
+    .then(success => {
+      console.log(success);
+    })
+    .catch(error => {
+      console.log(error)
+    });
+  })
+  /*
+  // Activate Background-Sync with ServiceWorkerReady
+	if ('serviceWorker' in navigator) {
+		navigator.serviceWorker.ready.then(swRegistration => {
+			return swRegistration.sync.register('sync-reviews');
+		});
+	}*/
+}
+  /*.then(function(response) {
+      //return DBHelper.urlForRestaurant(restaurant);
   })
   .then(function (json){
       console.log(json);
   })
   .catch(error => console.error(`Fetch Error =\n`, error));
+  location.reload();
   //debugger;
-  }
-
-/**
-  * Add functionality to make review form popup
-  */
-
-  // Get the body Element
-  var body = document.getElementsByTagName("BODY")[0];
-
-  // Get the modal
-  var modal = document.getElementById('myModal');
-
-  // Get the button that opens the modal
-  var btn = document.getElementById("popUp");
-
-  // Get the <span> element that closes the modal
-  var span = document.getElementsByClassName("close")[0];
-
-  // When the user clicks on the button, open the modal and stop page from scrolling
-  btn.onclick = function() {
-    modal.style.display = "block";
-    body.style.overflow = "hidden";
-  }
-
-  // When the user clicks on <span> (x), close the modal
-  span.onclick = function() {
-    modal.style.display = "none";
-    body.style.overflow = "scroll";
-  }
-
-  // When the user clicks anywhere outside of the modal, close it
-  window.onclick = function(event) {
-    if (event.target == modal) {
-        modal.style.display = "none";
-        body.style.overflow = "scroll";
-    }
-  }
+  createReviewHTML(review);*/
