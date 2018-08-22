@@ -22,7 +22,7 @@ Ayotunde Sodeke
 ### Acknowledgments
 
 * Udacity/Google for this amazing opportunity to learn about accessibility and responsive web development
-* [Gerogios] Mentor at Udacity
+* [Georgios] Mentor at Udacity
 * Fellow student at Udacity Slack community for answering my question and helping me solve different issues. 
 * https://developers.google.com/web/fundamentals/primers/service-workers/
 * https://developers.google.com/web/ilt/pwa/working-with-indexeddb
